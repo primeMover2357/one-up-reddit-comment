@@ -1,12 +1,19 @@
-# Test Url https://www.reddit.com/r/aww/comments/5vj9ut/these_cows_look_like_theyre_about_to_drop_the/
+# Test Url
 # https://www.reddit.com/r/AskReddit/comments/1lk71pn/people_born_before_2000_what_trivial_skill_you/
+
 import praw
 from desinc import comment_karma
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # Load variables from .env into environment
 
-reddit = praw.Reddit(user_agent="Descending Increase",
-                     client_id="d5n8CMZMGx52yQ",
-                     client_secret="l54jhktdoxXFWNfOVM8FY2AnolI")
+reddit = praw.Reddit(
+    client_id=os.getenv("REDDIT_CLIENT_ID"),
+    client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
+    user_agent=os.getenv("REDDIT_USER_AGENT")
+)
+
 
 page_url = input('URL ')
 
