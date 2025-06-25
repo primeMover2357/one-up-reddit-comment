@@ -13,12 +13,12 @@ def rfunction(submission_id):
 
     for comment in parent[0].replies:
         if comment_karma(comment) > karma:
-            print parent[0].body
-            print 40 * '-'
-            print comment.body
-            print '\nIn ratio ', karma, '-->', comment_karma(comment), '/'
+            print(parent[0].body)
+            print(40 * '-')
+            print(comment.body)
+            print('\nIn ratio ', karma, '-->', comment_karma(comment), '/')
     else:
-        print 'Nothing to see here'
+        print('Nothing to see here')
 		
 
 def comment_karma(comment):
