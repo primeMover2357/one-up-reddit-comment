@@ -30,7 +30,6 @@ submission.comments.replace_more(limit=0)
 all_comments = submission.comments.list()
 
 
-
 filename = "reddit_comments.html"
 
 
