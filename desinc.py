@@ -1,4 +1,5 @@
 import praw
+import clipboard
 
 reddit = praw.Reddit(user_agent="Descending Increase",
 					 client_id="d5n8CMZMGx52yQ",

@@ -1,20 +1,28 @@
-# Test Url https://www.reddit.com/r/aww/comments/5vj9ut/these_cows_look_like_theyre_about_to_drop_the/
-# https://www.reddit.com/r/AskReddit/comments/1lk71pn/people_born_before_2000_what_trivial_skill_you/
 import praw
 from desinc import comment_karma
+import clipboard
 
 
 reddit = praw.Reddit(user_agent="Descending Increase",
                      client_id="d5n8CMZMGx52yQ",
                      client_secret="l54jhktdoxXFWNfOVM8FY2AnolI")
 
-page_url = input('URL ')
+page_url = clipboard.paste()
+print(f"Pasted URL: '{page_url}'")  # with quotes to see whitespace
 
-submission = reddit.submission(url = page_url)
+
+try:
+    submission = reddit.submission(url=page_url)
+    print("Submission found:", submission.title)
+except Exception as e:
+    print("Failed to load submission:", e)
+
+
 submission.comments.replace_more(limit=0)
 
-#top_level_comments = list(submission.comments)
+
 all_comments = submission.comments.list()
+
 
 for comment in all_comments:
     if comment.is_root == False:
