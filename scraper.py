@@ -1,11 +1,17 @@
 import praw
-from desinc import comment_karma
 import clipboard
+import webbrowser
+import os
 
+def comment_karma(comment):
+    return comment.ups - comment.downs
 
 reddit = praw.Reddit(user_agent="Descending Increase",
                      client_id="d5n8CMZMGx52yQ",
                      client_secret="l54jhktdoxXFWNfOVM8FY2AnolI")
+
+
+filename = "reddit_comments.html"
 
 page_url = clipboard.paste()
 print(f"Pasted URL: '{page_url}'")  # with quotes to see whitespace
@@ -24,18 +30,23 @@ submission.comments.replace_more(limit=0)
 all_comments = submission.comments.list()
 
 
-for comment in all_comments:
-    if comment.is_root == False:
-        parent = comment.parent()
-        if comment_karma(comment) > comment_karma(parent):
-          percent_change = (comment_karma(comment) - comment_karma(parent)) / comment_karma(parent)           
-          print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', percent_change)
-          print(parent.body)
-          print("Permalink: https://www.reddit.com" + parent.permalink)
-          print(90 * '-')
-          print(comment.body)
-          print(90 * '*')
-          print(90 * '*')
 
-print('Finished searching')
+filename = "reddit_comments.html"
 
+
+with open(filename, "w", encoding="utf-8") as f:
+    f.write("<html><body style='font-family: sans-serif;'>")
+    for comment in all_comments:
+        if comment.is_root == False:
+            parent = comment.parent()
+            if comment_karma(comment) > comment_karma(parent):
+            # percent_change = (comment_karma(comment) - comment_karma(parent)) / comment_karma(parent)           
+            # print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', percent_change)
+            # print(parent.body)
+            # print("Permalink: https://www.reddit.com" + parent.permalink)
+                link = "https://www.reddit.com" + parent.permalink
+                f.write(f"<p><b>Comment:</b><br>{parent.body}<br>")
+                f.write(f'<a href="{link}">Permalink</a></p><hr>')
+    f.write("<hr><p>Finished searching</p></body></html>")
+
+webbrowser.open('file://' + os.path.abspath(filename))
