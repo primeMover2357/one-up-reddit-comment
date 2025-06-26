@@ -10,12 +10,10 @@ reddit = praw.Reddit(user_agent="Descending Increase",
                      client_id="d5n8CMZMGx52yQ",
                      client_secret="l54jhktdoxXFWNfOVM8FY2AnolI")
 
-
 filename = "reddit_comments.html"
 
-page_url = clipboard.paste()
+page_url = clipboard.get()
 print(f"Pasted URL: '{page_url}'")  # with quotes to see whitespace
-
 
 try:
     submission = reddit.submission(url=page_url)
@@ -23,15 +21,11 @@ try:
 except Exception as e:
     print("Failed to load submission:", e)
 
-
 submission.comments.replace_more(limit=0)
-
 
 all_comments = submission.comments.list()
 
-
 filename = "reddit_comments.html"
-
 
 with open(filename, "w", encoding="utf-8") as f:
     f.write("<html><body style='font-family: sans-serif;'>")
@@ -40,9 +34,6 @@ with open(filename, "w", encoding="utf-8") as f:
             parent = comment.parent()
             if (comment_karma(comment) > comment_karma(parent)) and (comment_karma(parent) > 0):
                 ratio = comment_karma(comment) / comment_karma(parent)           
-            # print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', ratio)
-            # print(parent.body)
-            # print("Permalink: https://www.reddit.com" + parent.permalink)
                 link = "https://www.reddit.com" + parent.permalink
                 f.write(f"<p><b>Comment:</b><br>{parent.body}<br>")
                 f.write(f'<a href="{link}">Permalink</a><br>')
