@@ -31,7 +31,7 @@ for comment in all_comments:
           percent_change = (comment_karma(comment) - comment_karma(parent)) / comment_karma(parent)           
           print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', percent_change)
           print(parent.body)
-          print("Permalink: https://www.reddit.com" + comment.permalink)
+          print("Permalink: https://www.reddit.com" + parent.permalink)
           print(90 * '-')
           print(comment.body)
           print(90 * '*')
