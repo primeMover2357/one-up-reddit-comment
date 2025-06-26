@@ -39,14 +39,14 @@ with open(filename, "w", encoding="utf-8") as f:
         if comment.is_root == False:
             parent = comment.parent()
             if (comment_karma(comment) > comment_karma(parent)) and (comment_karma(parent) > 0):
-                percent_change = (comment_karma(comment) - comment_karma(parent)) / comment_karma(parent)           
-            # print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', percent_change)
+                ratio = comment_karma(comment) / comment_karma(parent)           
+            # print(comment_karma(parent), '----->', comment_karma(comment), '||||||||',  parent.fullname, '----->' , comment.fullname, 'RATIO: ', ratio)
             # print(parent.body)
             # print("Permalink: https://www.reddit.com" + parent.permalink)
                 link = "https://www.reddit.com" + parent.permalink
                 f.write(f"<p><b>Comment:</b><br>{parent.body}<br>")
                 f.write(f'<a href="{link}">Permalink</a><br>')
-                f.write(f'<p><em>(r={percent_change:.2f}, comment={comment_karma(parent)}, reply={comment_karma(comment)})</em></p>')
+                f.write(f'<p><b>(r = {ratio:.2f}, comment = {comment_karma(parent)}, reply = {comment_karma(comment)})</b></p>')
                 f.write(f"<p><b>Reply:</b><br>{comment.body}</p><hr>")
     f.write("<hr><p>Finished searching</p></body></html>")
 
