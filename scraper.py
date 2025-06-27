@@ -34,10 +34,8 @@ with open(filename, "w", encoding="utf-8") as f:
             if (comment_karma(comment) > comment_karma(parent)) and (comment_karma(parent) > 0):
                 ratio = comment_karma(comment) / comment_karma(parent)           
                 link = "https://www.reddit.com" + parent.permalink
-                f.write(f"<p><b>Comment:</b><br>{parent.body}<br>")
-                f.write(f'<a href="{link}">Permalink</a><br>')
-                f.write(f'<p><b>(r = {ratio:.2f}, comment = {comment_karma(parent)}, reply = {comment_karma(comment)})</b></p><hr>')
-    f.write("<hr><p>Finished searching</p></body></html>")
+                f.write(f'<b>r = {ratio:.2f} | comment = {comment_karma(parent)} | reply = {comment_karma(comment)}): </b> <a href="{link}">Permalink</a><hr>')
+    f.write("<p>Finished searching</p></body></html>")
 
 import ui
 webview = ui.WebView()
