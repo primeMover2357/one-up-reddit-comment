@@ -1,5 +1,4 @@
 import praw
-import clipboard
 import webbrowser
 import os
 
@@ -13,8 +12,8 @@ reddit = praw.Reddit(user_agent="Descending Increase",
 
 filename = "reddit_comments.html"
 
-page_url = clipboard.paste()
-print(f"Pasted URL: '{page_url}'")  # with quotes to see whitespace
+page_url = input("Paste Reddit URL: ").strip()
+print(f"Pasted URL: '{page_url}'")
 
 
 try:
@@ -50,4 +49,7 @@ with open(filename, "w", encoding="utf-8") as f:
                 f.write(f"<p><b>Reply:</b><br>{comment.body}</p><hr>")
     f.write("<hr><p>Finished searching</p></body></html>")
 
-webbrowser.open('file://' + os.path.abspath(filename))
+import ui
+webview = ui.WebView()
+webview.load_url('file://' + os.path.abspath(filename))
+webview.present()

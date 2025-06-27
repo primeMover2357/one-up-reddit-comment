@@ -1,2 +1,4 @@
 *.html
 *.pyc
+__pyache__/
+__pyache__
