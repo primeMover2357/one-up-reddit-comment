@@ -36,8 +36,7 @@ with open(filename, "w", encoding="utf-8") as f:
                 link = "https://www.reddit.com" + parent.permalink
                 f.write(f"<p><b>Comment:</b><br>{parent.body}<br>")
                 f.write(f'<a href="{link}">Permalink</a><br>')
-                f.write(f'<p><b>(r = {ratio:.2f}, comment = {comment_karma(parent)}, reply = {comment_karma(comment)})</b></p>')
-                f.write(f"<p><b>Reply:</b><br>{comment.body}</p><hr>")
+                f.write(f'<p><b>(r = {ratio:.2f}, comment = {comment_karma(parent)}, reply = {comment_karma(comment)})</b></p><hr>')
     f.write("<hr><p>Finished searching</p></body></html>")
 
 import ui
