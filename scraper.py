@@ -42,7 +42,7 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS high_ratio_comments (
     submission_id TEXT,
     parent_id TEXT,
-    reply_id TEXT,
+    reply_id TEXT PRIMARY KEY,
     parent_body TEXT,
     reply_body TEXT,
     parent_karma INTEGER,
