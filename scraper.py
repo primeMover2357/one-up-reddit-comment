@@ -13,7 +13,7 @@ reddit = praw.Reddit(user_agent="Descending Increase",
 
 filename = "reddit_comments.html"
 
-page_url = clipboard.paste()
+page_url = input("Paste URL: ")
 print(f"Pasted URL: '{page_url}'")  # with quotes to see whitespace
 
 
