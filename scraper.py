@@ -2,6 +2,7 @@ import praw
 import clipboard
 import webbrowser
 import os
+import sqlite3
 
 def comment_karma(comment):
     return comment.ups - comment.downs
